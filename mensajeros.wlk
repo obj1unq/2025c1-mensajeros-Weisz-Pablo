@@ -39,13 +39,9 @@ object lincolnHawk {
 	var pesoPropio = 0 + paquete.pesoDelPaquete()
 	var vehiculo = "bicicleta"
 	var cantidadDeAcoplados = 0
+	var pesoDelTransporte = 0
 	
 	method puedeLlamar() = false
-	
-	method pesoDeHawk(_pesoDeHawk) {
-		pesoPropio = 0 + paquete.pesoDelPaquete()
-		pesoPropio = _pesoDeHawk
-	}
 	
 	method vehiculousado(_vehiculoUsado) {
 		vehiculo = _vehiculoUsado
@@ -57,13 +53,17 @@ object lincolnHawk {
 	}
 	
 	method transporteElegido() {
+		pesoDelTransporte = 0
 		if (vehiculo == "bicicleta") {
-			pesoPropio += 10
+			pesoDelTransporte = 10
 		} else {
-			if (vehiculo == "camion") {
-				pesoPropio += 500 + (cantidadDeAcoplados * 500)
-			}
+			pesoDelTransporte = 500 + (cantidadDeAcoplados * 500)
 		}
+	}
+	
+	method pesoDeHawk(_pesoDeHawk) {
+		pesoPropio = 0 + paquete.pesoDelPaquete()
+		pesoPropio = (_pesoDeHawk + paquete.pesoDelPaquete()) + pesoDelTransporte
 	}
 	
 	method pesoDelMensajero() = pesoPropio
