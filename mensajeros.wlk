@@ -23,7 +23,7 @@ object chuckNorris {
 	method pesoDelMensajero() = 900 + paquete.pesoDelPaquete()
 }
 
-object Neo {
+object neo {
 	var creditoParaLlamar = false
 	
 	method tieneCredito(_tieneCredito) {
@@ -36,10 +36,10 @@ object Neo {
 }
 
 object lincolnHawk {
-	var pesoPropio = 0 + paquete.pesoDelPaquete()
+	var pesoPropio = (0 + paquete.pesoDelPaquete()) + pesoDelTransporte
 	var vehiculo = "bicicleta"
 	var cantidadDeAcoplados = 0
-	var pesoDelTransporte = 0
+	var pesoDelTransporte = 10
 	
 	method puedeLlamar() = false
 	
