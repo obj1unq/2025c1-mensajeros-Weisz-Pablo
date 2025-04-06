@@ -28,41 +28,59 @@ object neo {
 
 object lincolnHawk {
 	var pesoCuerpo = 0
-	var pesoVehiculo = 0
-			
+	var vehiculo = bicicleta
+	
+	method vehiculo(_vehiculo) {
+		vehiculo = _vehiculo
+	}
+	
 	method puedeLlamar() = false
 	
-	method pesoCuerpo(_pesoCuerpo){
+	method pesoCuerpo(_pesoCuerpo) {
 		pesoCuerpo = _pesoCuerpo
 	}
-
-	method pesoVehiculo(transporte) {
-	    pesoVehiculo = transporte.peso()	
-	}
-
-	method peso() = pesoVehiculo + pesoCuerpo
-	 
+	
+	method peso() = vehiculo.peso() + pesoCuerpo
 }
 
-object bicicleta{
+object bicicleta {
 	method peso() = 10
 }
 
-object camion{
+object camion {
 	var cantidadDeAcoplados = 0
-
+	
 	method cantidadDeAcoplados(_cantidadDeAcoplados) {
-	cantidadDeAcoplados = _cantidadDeAcoplados
+		cantidadDeAcoplados = _cantidadDeAcoplados
 	}
+	
 	method peso() = 500 + (cantidadDeAcoplados * 500)
 }
 
 object brooklyn {
+	var paqueteAEntregar = paquete
+	
 	method aceptaMensajero(mensajero) = mensajero.peso() <= 1000
-	method puedeEntregar(mensajero) = self.aceptaMensajero(mensajero) && paquete.estaPago()
+	
+	method paqueteAEntregar(_paqueteAEntregar) {
+		paqueteAEntregar = _paqueteAEntregar
+	}
+	
+	method puedeEntregar(mensajero, paquete) = self.aceptaMensajero(
+		mensajero
+	) && paqueteAEntregar.estaPago()
 }
 
 object matrix {
+	var paqueteAEntregar = paquete
+	
+	method paqueteAEntregar(_paqueteAEntregar) {
+		paqueteAEntregar = _paqueteAEntregar
+	}
+	
 	method aceptaMensajero(mensajero) = mensajero.puedeLlamar()
-	method puedeEntregar(mensajero) = self.aceptaMensajero(mensajero) && paquete.estaPago()
+	
+	method puedeEntregar(mensajero, paquete) = self.aceptaMensajero(
+		mensajero
+	) && paqueteAEntregar.estaPago()
 }
