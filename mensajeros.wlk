@@ -47,18 +47,25 @@ object camion {
 	method peso() = 500 + (cantidadDeAcoplados * 500)
 }
 
-object destino {
-	method envioPago(pago) = pago
+object paquete {
+	var estaPago = false
 	
-	method puedeEntregar(mensajero, pago, destino) = destino.aceptaMensajero(
+	method estaPago(_estaPago) {
+		estaPago = _estaPago
+	}
+	
+	method estaPago() = estaPago
+	
+	method puedeSerEntregado(
+		destino,
 		mensajero
-	) && self.envioPago(pago)
+	) = self.estaPago() && destino.puedeSerEntregado(mensajero)
 }
 
 object brooklyn {
-	method aceptaMensajero(mensajero) = mensajero.peso() <= 1000
+	method puedeSerEntregado(mensajero) = mensajero.peso() <= 1000
 }
 
 object matrix {
-	method aceptaMensajero(mensajero) = mensajero.puedeLlamar()
+	method puedeSerEntregado(mensajero) = mensajero.puedeLlamar()
 }
