@@ -1,13 +1,3 @@
-object paquete {
-	var estaPago = false
-	
-	method paquetePago(_paquetePago) {
-		estaPago = _paquetePago
-	}
-	
-	method estaPago() = estaPago
-}
-
 object chuckNorris {
 	method puedeLlamar() = true
 	
@@ -57,30 +47,18 @@ object camion {
 	method peso() = 500 + (cantidadDeAcoplados * 500)
 }
 
-object brooklyn {
-	var paqueteAEntregar = paquete
+object destino {
+	method envioPago(pago) = pago
 	
-	method aceptaMensajero(mensajero) = mensajero.peso() <= 1000
-	
-	method paqueteAEntregar(_paqueteAEntregar) {
-		paqueteAEntregar = _paqueteAEntregar
-	}
-	
-	method puedeEntregar(mensajero, paquete) = self.aceptaMensajero(
+	method puedeEntregar(mensajero, pago, destino) = destino.aceptaMensajero(
 		mensajero
-	) && paqueteAEntregar.estaPago()
+	) && self.envioPago(pago)
+}
+
+object brooklyn {
+	method aceptaMensajero(mensajero) = mensajero.peso() <= 1000
 }
 
 object matrix {
-	var paqueteAEntregar = paquete
-	
-	method paqueteAEntregar(_paqueteAEntregar) {
-		paqueteAEntregar = _paqueteAEntregar
-	}
-	
 	method aceptaMensajero(mensajero) = mensajero.puedeLlamar()
-	
-	method puedeEntregar(mensajero, paquete) = self.aceptaMensajero(
-		mensajero
-	) && paqueteAEntregar.estaPago()
 }
